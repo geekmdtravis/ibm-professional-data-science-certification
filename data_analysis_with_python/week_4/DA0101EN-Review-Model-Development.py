@@ -118,6 +118,7 @@ lm.fit(X,Y)
 # %%
 Yhat=lm.predict(X)
 Yhat[0:5]   
+
 # %% [markdown]
 # <h4>What is the value of the intercept (a)?</h4>
 
@@ -151,7 +152,10 @@ lm.coef_
 
 # %%
 # Write your code below and press Shift+Enter to execute 
-lm = LinearRegression()
+
+lm1 = LinearRegression()
+lm1
+
 # %% [markdown]
 # Double-click <b>here</b> for the solution.
 # 
@@ -168,12 +172,11 @@ lm = LinearRegression()
 # <b>Train the model using 'engine-size' as the independent variable and 'price' as the dependent variable?</b>
 # </div>
 
-
 # %%
 # Write your code below and press Shift+Enter to execute 
-X = df[['engine-size']]
-y = df['price']
-lm.fit(X, y)
+lm1.fit(df[['highway-mpg']], df[['price']])
+lm1
+
 # %% [markdown]
 # Double-click <b>here</b> for the solution.
 # 
@@ -190,20 +193,19 @@ lm.fit(X, y)
 # 
 # <b>Find the slope and intercept of the model?</b>
 # </div>
-
 # %% [markdown]
 # <h4>Slope</h4>
 
 # %%
 # Write your code below and press Shift+Enter to execute 
-lm.coef_
+lm1.coef_
 
 # %% [markdown]
 # <h4>Intercept</h4>
 
 # %%
 # Write your code below and press Shift+Enter to execute 
-lm.intercept_
+lm1.intercept_
 
 # %% [markdown]
 # Double-click <b>here</b> for the solution.
@@ -317,11 +319,9 @@ lm.coef_
 
 # %%
 # Write your code below and press Shift+Enter to execute 
-X = df[['normalized-losses', 'highway-mpg']]
-y = df['price']
-
-lm = LinearRegression()
-lm.fit(X, y)
+lm2 = LinearRegression()
+lm2.fit(df[['normalized-losses', 'highway-mpg']], df[['price']])
+lm2
 
 # %% [markdown]
 # Double-click <b>here</b> for the solution.
@@ -340,8 +340,7 @@ lm.fit(X, y)
 
 # %%
 # Write your code below and press Shift+Enter to execute 
-lm.coef_
-lm.intercept_
+lm2.coef_
 
 # %% [markdown]
 # Double-click <b>here</b> for the solution.
@@ -398,7 +397,6 @@ plt.ylim(0,)
 
 # %%
 # Write your code below and press Shift+Enter to execute 
-df[['peak-rpm', 'highway-mpg','price']].corr()
 
 # %% [markdown]
 # Double-click <b>here</b> for the solution.
@@ -449,8 +447,6 @@ plt.show()
 # First lets make a prediction 
 
 # %%
-lm = LinearRegression()
-lm.fit(Z, df['price'])
 Y_hat = lm.predict(Z)
 
 
@@ -528,8 +524,8 @@ y = df['price']
 
 # %%
 # Here we use a polynomial of the 3rd order (cubic) 
-poly_fit = np.polyfit(x, y, 3)
-p = np.poly1d(poly_fit)
+f = np.polyfit(x, y, 3)
+p = np.poly1d(f)
 print(p)
 
 # %% [markdown]
@@ -552,10 +548,11 @@ np.polyfit(x, y, 3)
 
 # %%
 # Write your code below and press Shift+Enter to execute 
-poly_fit = np.polyfit(x, y, 11)
-p = np.poly1d(poly_fit)
+f = np.polyfit(x, y, 11)
+p = np.poly1d(f)
 print(p)
-PlotPolly(p, x, y, 'Highway MPG')
+
+PlotPolly(p, x, y, 'highway-mpg')
 
 # %% [markdown]
 # Double-click <b>here</b> for the solution.
@@ -648,6 +645,12 @@ ypipe[0:4]
 
 # %%
 # Write your code below and press Shift+Enter to execute 
+Input=[('scale', StandardScaler()), ('model', LinearRegression())]
+pipe = Pipeline(Input)
+pipe.fit(Z,y)
+
+ypipe = pipe.predict(Z)
+ypipe[0:10]
 
 # %% [markdown]
 # </div>
